@@ -8,4 +8,7 @@ jobs:
     steps:
       - checkout
       - run: ./mvnw clean install
+      - run:
+        name: Added execution rights to ./mvnw
+        command: sudo chmod +x ./mvnw
       - run: ./mvnw test
