@@ -10,5 +10,5 @@ jobs:
       - run:
           name: Added execution rights to ./mvnw
           command: sudo chmod +x ./mvnw
-      - run: ./mvnw clean install
-      - run: ./mvnw test
+      - run: ./mvnw clean install -Dspring.profiles.active=prod
+      - run: ./mvnw test -Dspring.profiles.active=prod

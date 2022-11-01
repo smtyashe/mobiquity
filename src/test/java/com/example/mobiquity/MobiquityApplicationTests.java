@@ -3,6 +3,7 @@ package com.example.mobiquity;
 import com.example.mobiquity.validation.EmailValidation;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
@@ -12,15 +13,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class MobiquityApplicationTests {
-	private String endpoint = "http://localhost:3000";
-	private String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+
+	@Value("${resource.endpoint.baseUrl}")
+	private String endpoint;
+	final private String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
 			+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+	@Value("${env}")
+	private String env;
+
+
 	@Test
 	void test() {
+		System.out.println("**************** "+env+" **************");
 		int userid = (int)((ArrayList)given()
 				.queryParam("username", "Delphine")
 				.when()
-				.get(endpoint + "/users")
+				.get(endpoint.concat("/users"))
 				.then()
 				.assertThat()
 				.statusCode(200)
@@ -32,7 +40,7 @@ class MobiquityApplicationTests {
 		ArrayList posts = given()
 				.queryParam("userId", userid)
 				.when()
-				.get(endpoint + "/posts")
+				.get(endpoint.concat("/posts"))
 				.then()
 				.assertThat()
 				.statusCode(200)
@@ -45,7 +53,7 @@ class MobiquityApplicationTests {
 			ArrayList<String> emails = (ArrayList)given()
 					.queryParam("postId", postId)
 					.when()
-					.get(endpoint + "/comments")
+					.get(endpoint.concat( "/comments"))
 					.then()
 					.assertThat()
 					.statusCode(200)
