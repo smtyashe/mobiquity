@@ -3,7 +3,7 @@ jobs:
   build:
 
     docker:
-      - image: circleci/openjdk:17-jdk-stretch
+      - image: cimg/openjdk:17.0
 
     steps:
       - checkout
