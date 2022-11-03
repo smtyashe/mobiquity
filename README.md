@@ -1,7 +1,7 @@
 ## Mobiquity Assessment Project
 
 This is a spring boot application built using Java 17.
-Tech used :
+### Tech used :
 * Cucumber-spring
 * Cucumber-reporting
 * RestAssured
